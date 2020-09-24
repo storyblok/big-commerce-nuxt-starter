@@ -1,0 +1,72 @@
+<template>
+  <nav
+    v-if="story.content"
+    v-editable="story.content"
+    class="bg-white shadow-lg w-full fixed z-20 top-0 left-0"
+  >
+    <div
+      class="md:flex container w-full mx-auto items-center justify-between py-2"
+    >
+      <div class="flex justify-between items-center">
+        <div class="text-2xl font-bold text-gray-800 md:text-3xl">
+          <nuxt-link to="/home"> {{ story.content.title }} </nuxt-link>
+        </div>
+        <div class="md:hidden">
+          <button
+            type="button"
+            class="block text-gray-800 hover:text-gray-700 focus:text-gray-700 focus:outline-none"
+          >
+            <svg class="h-6 w-6 fill-current" viewBox="0 0 24 24">
+              <path
+                class="hidden"
+                d="M16.24 14.83a1 1 0 0 1-1.41 1.41L12 13.41l-2.83 2.83a1 1 0 0 1-1.41-1.41L10.59 12 7.76 9.17a1 1 0 0 1 1.41-1.41L12 10.59l2.83-2.83a1 1 0 0 1 1.41 1.41L13.41 12l2.83 2.83z"
+              />
+              <path
+                d="M4 5h16a1 1 0 0 1 0 2H4a1 1 0 1 1 0-2zm0 6h16a1 1 0 0 1 0 2H4a1 1 0 0 1 0-2zm0 6h16a1 1 0 0 1 0 2H4a1 1 0 0 1 0-2z"
+              />
+            </svg>
+          </button>
+        </div>
+      </div>
+      <div class="flex flex-col md:flex-row hidden md:block -mx-2">
+        <nuxt-link
+          v-for="item in story.content.items"
+          :key="item.name"
+          :to="item.url.cached_url"
+          class="text-gray-800 rounded hover:bg-primary hover:text-gray-100 hover:font-medium py-2 px-2 md:mx-2"
+          >{{ item.name }}</nuxt-link
+        >
+      </div>
+    </div>
+  </nav>
+</template>
+
+<script>
+export default {
+  data() {
+    return {
+      story: {},
+    }
+  },
+  async mounted() {
+    try {
+      const response = await this.$storyapi.get('cdn/stories/navigation', {
+        version: 'draft',
+      })
+      this.story = response.data.story
+
+      this.$storybridge.on(['input', 'published', 'change'], (event) => {
+        if (event.action === 'input') {
+          if (event.story.id === this.story.id) {
+            this.story.content = event.story.content
+          }
+        } else if (!event.slugChanged) {
+          window.location.reload()
+        }
+      })
+    } catch (error) {
+      this.error = error
+    }
+  },
+}
+</script>
