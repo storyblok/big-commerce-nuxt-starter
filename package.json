@@ -28,6 +28,7 @@
         "eslint-config-prettier": "^6.11.0",
         "eslint-plugin-nuxt": "^1.0.0",
         "eslint-plugin-prettier": "^3.1.4",
+        "netrc": "^0.1.4",
         "prettier": "^2.0.5"
     }
 }

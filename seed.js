@@ -13,6 +13,33 @@ args.forEach((arg) => {
   }
 })
 
+const navigationEntry = {
+  story: {
+    name: 'Navigation',
+    slug: 'navigation',
+    parent_id: '0',
+    content: {
+      _uid: '935003b0-c35d-4887-96b0-997054e3a40c',
+      items: [
+        {
+          url: {
+            id: '1985250b-5446-4806-9f68-0c6a1afbcb60',
+            url: '',
+            linktype: 'story',
+            fieldtype: 'multilink',
+            cached_url: 'home',
+          },
+          _uid: 'a77e4b68-d722-4b1d-a072-c341b4332d70',
+          name: 'Home',
+          component: 'link',
+        },
+      ],
+      title: 'A Brand',
+      component: 'navigation',
+    },
+  },
+}
+
 const home =
   process.env[process.platform.startsWith('win') ? 'USERPROFILE' : 'HOME']
 const credsNetrc = netrc(path.join(home, '.netrc'))
@@ -39,9 +66,15 @@ async function startSeed() {
     },
   })
 
-  // Fill Home content entry with base data from NuxtDoc
-  const res1 = await instance.get('/stories/', { page: 1 })
-  const homeStory = res1.data.stories.find((story) => {
+  // Navigaiton
+  const resNav = await instance
+    .post('/stories', navigationEntry)
+    .catch((error) => console.error(error))
+  console.log('Seed: Navigation created')
+
+  // Fill Home content entry
+  const resHome = await instance.get('/stories/', { page: 1 })
+  const homeStory = resHome.data.stories.find((story) => {
     return story.slug === 'home'
   })
   homeStory.path = '/'
@@ -72,32 +105,7 @@ async function startSeed() {
         component: 'Categories Bar',
         categories: {
           _uid: 'c15f01b8-9af6-4361-b7bd-181ccc1fcb56',
-          items: [
-            {
-              name: 'Publications',
-              path: '/publications/',
-              children: [],
-              entityId: 20,
-              description: '',
-              productCount: 1,
-            },
-            {
-              name: 'Bath',
-              path: '/bath/',
-              children: [],
-              entityId: 18,
-              description: '',
-              productCount: 1,
-            },
-            {
-              name: 'Garden',
-              path: '/garden/',
-              children: [],
-              entityId: 19,
-              description: '',
-              productCount: 2,
-            },
-          ],
+          items: [],
           plugin: 'big-commerce-categories',
         },
       },
@@ -106,21 +114,7 @@ async function startSeed() {
         heading: 'Featured Product',
         product: {
           _uid: 'a11b5a2a-9e36-4ecd-b367-c88c7de00b06',
-          items: [
-            {
-              id: 'UHJvZHVjdDo4MA==',
-              sku: 'OTL',
-              name: '[Sample] Orbit Terrarium - Large',
-              entityId: 80,
-              defaultImage: {
-                altText: '',
-                img320px:
-                  'https://cdn11.bigcommerce.com/s-w2gk34tjxo/images/stencil/320w/products/80/272/roundterrariumlarge.1599742292.jpg',
-              },
-              plainTextDescription:
-                'This strikingly beautiful terrarium will make a welcome addition to your home bringing some green to the scene. A...',
-            },
-          ],
+          items: [],
           plugin: 'big-commerce',
         },
         component: 'Feature',
@@ -129,32 +123,7 @@ async function startSeed() {
         _uid: 'ecbd894d-d779-4564-95c8-a45b468b02eb',
         items: {
           _uid: 'ea6c7d50-46ae-43a0-ba83-f9a34869b5a6',
-          items: [
-            {
-              name: 'Utility',
-              path: '/utility/',
-              children: [],
-              entityId: 22,
-              description: '',
-              productCount: 4,
-            },
-            {
-              name: 'Kitchen',
-              path: '/kitchen/',
-              children: [],
-              entityId: 21,
-              description: '',
-              productCount: 5,
-            },
-            {
-              name: 'Garden',
-              path: '/garden/',
-              children: [],
-              entityId: 19,
-              description: '',
-              productCount: 2,
-            },
-          ],
+          items: [],
           plugin: 'big-commerce-categories',
         },
         heading: 'New Arrivals',
@@ -164,73 +133,7 @@ async function startSeed() {
         _uid: '4e89ee54-3de9-49bf-87d5-852a9a28f15e',
         items: {
           _uid: 'f35b1870-3a3c-4367-8834-586619d38e61',
-          items: [
-            {
-              id: 'UHJvZHVjdDo4MA==',
-              sku: 'OTL',
-              name: '[Sample] Orbit Terrarium - Large',
-              entityId: 80,
-              defaultImage: {
-                altText: '',
-                img320px:
-                  'https://cdn11.bigcommerce.com/s-w2gk34tjxo/images/stencil/320w/products/80/272/roundterrariumlarge.1599742292.jpg',
-              },
-              plainTextDescription:
-                'This strikingly beautiful terrarium will make a welcome addition to your home bringing some green to the scene. A...',
-            },
-            {
-              id: 'UHJvZHVjdDo4OA==',
-              sku: 'CC3C',
-              name: '[Sample] Chemex Coffeemaker 3 Cup',
-              entityId: 88,
-              defaultImage: {
-                altText: '',
-                img320px:
-                  'https://cdn11.bigcommerce.com/s-w2gk34tjxo/images/stencil/320w/products/88/292/3cupchemex5.1599742292.jpg',
-              },
-              plainTextDescription:
-                'The Chemex Coffeemaker was created in 1939 by famed inventor Peter J. Schlumbohm\n                                \n\n    ...',
-            },
-            {
-              id: 'UHJvZHVjdDo5Mw==',
-              sku: 'SLLPJ',
-              name: '[Sample] 1 L Le Parfait Jar',
-              entityId: 93,
-              defaultImage: {
-                altText: '',
-                img320px:
-                  'https://cdn11.bigcommerce.com/s-w2gk34tjxo/images/stencil/320w/products/93/311/leparfaitmedium3.1599742292.jpg',
-              },
-              plainTextDescription:
-                'When translated Le Parfait means "the perfect one" - and that\'s just what this air-tight jar is. Designed for canning,...',
-            },
-            {
-              id: 'UHJvZHVjdDo4Ng==',
-              sku: 'ABS',
-              name: '[Sample] Able Brewing System',
-              entityId: 86,
-              defaultImage: {
-                altText: '',
-                img320px:
-                  'https://cdn11.bigcommerce.com/s-w2gk34tjxo/images/stencil/320w/products/86/286/ablebrewingsystem4.1599742292.jpg',
-              },
-              plainTextDescription:
-                'Stemming from an intense passion for the most flavourful cup of coffee, Able Brewing set out to create a brewer that...',
-            },
-            {
-              id: 'UHJvZHVjdDo5OA==',
-              sku: 'CGLD',
-              name: '[Sample] Laundry Detergent',
-              entityId: 98,
-              defaultImage: {
-                altText: '',
-                img320px:
-                  'https://cdn11.bigcommerce.com/s-w2gk34tjxo/images/stencil/320w/products/98/327/CommonGoodLaundrySoap.1599742292.jpg',
-              },
-              plainTextDescription:
-                'A 100% biodegradable plant based 3x concentrated laundry detergent for use in conventional and high efficiency machines...',
-            },
-          ],
+          items: [],
           plugin: 'big-commerce',
         },
         heading: 'Bestsellers',
@@ -239,131 +142,26 @@ async function startSeed() {
     ],
     products: {
       _uid: '0fd18b0c-2242-4add-8151-adaeb3d82dc1',
-      items: [
-        {
-          id: 'UHJvZHVjdDo5Nw==',
-          sku: 'TWB',
-          name: '[Sample] Tiered Wire Basket',
-          entityId: 97,
-          defaultImage: {
-            altText: '',
-            img320px:
-              'https://cdn11.bigcommerce.com/s-w2gk34tjxo/images/stencil/320w/products/97/325/tieredbasket.1599742292.jpg',
-          },
-          plainTextDescription:
-            "Here's a three tiered wire basket to clean up your countertop and elevate your storage space. Display a selection of...",
-        },
-        {
-          id: 'UHJvZHVjdDo3Nw==',
-          sku: 'SLCTBS',
-          name: '[Sample] Fog Linen Chambray Towel - Beige Stripe',
-          entityId: 77,
-          defaultImage: {
-            altText: '',
-            img320px:
-              'https://cdn11.bigcommerce.com/s-w2gk34tjxo/images/stencil/320w/products/77/266/foglinenbeigestripetowel1b.1599742291.jpg',
-          },
-          plainTextDescription:
-            'The perfect beach towel: thin, lightweight and highly absorbent. Crafted by Fog Linen in Japan using soft Lithuanian...',
-        },
-        {
-          id: 'UHJvZHVjdDo4OA==',
-          sku: 'CC3C',
-          name: '[Sample] Chemex Coffeemaker 3 Cup',
-          entityId: 88,
-          defaultImage: {
-            altText: '',
-            img320px:
-              'https://cdn11.bigcommerce.com/s-w2gk34tjxo/images/stencil/320w/products/88/292/3cupchemex5.1599742292.jpg',
-          },
-          plainTextDescription:
-            'The Chemex Coffeemaker was created in 1939 by famed inventor Peter J. Schlumbohm\n                                \n\n    ...',
-        },
-        {
-          id: 'UHJvZHVjdDo5Mw==',
-          sku: 'SLLPJ',
-          name: '[Sample] 1 L Le Parfait Jar',
-          entityId: 93,
-          defaultImage: {
-            altText: '',
-            img320px:
-              'https://cdn11.bigcommerce.com/s-w2gk34tjxo/images/stencil/320w/products/93/311/leparfaitmedium3.1599742292.jpg',
-          },
-          plainTextDescription:
-            'When translated Le Parfait means "the perfect one" - and that\'s just what this air-tight jar is. Designed for canning,...',
-        },
-        {
-          id: 'UHJvZHVjdDoxMDQ=',
-          sku: 'OFSUC',
-          name: '[Sample] Utility Caddy',
-          entityId: 104,
-          defaultImage: {
-            altText: '',
-            img320px:
-              'https://cdn11.bigcommerce.com/s-w2gk34tjxo/images/stencil/320w/products/104/336/utilitybucket1.1599742292.jpg',
-          },
-          plainTextDescription:
-            'This powder coated steel utility caddy ensures your cleaning essentials are stowed away in one spot ready for your...',
-        },
-      ],
+      items: [],
       plugin: 'big-commerce',
     },
     component: 'page',
     categories: {
       _uid: 'd1fa1612-c92a-411d-bd61-df7b38f31a9b',
-      items: [
-        {
-          name: 'Kitchen',
-          path: '/kitchen/',
-          children: [],
-          entityId: 21,
-          description: '',
-          productCount: 5,
-        },
-        {
-          name: 'Bath',
-          path: '/bath/',
-          children: [],
-          entityId: 18,
-          description: '',
-          productCount: 1,
-        },
-        {
-          name: 'Garden',
-          path: '/garden/',
-          children: [],
-          entityId: 19,
-          description: '',
-          productCount: 2,
-        },
-      ],
+      items: [],
       plugin: 'big-commerce-categories',
     },
     featured_product: {
       _uid: '2853eec7-0c49-4f92-afd3-d03636196d54',
-      items: [
-        {
-          id: 'UHJvZHVjdDo4MQ==',
-          sku: 'OTS',
-          name: '[Sample] Orbit Terrarium - Small',
-          entityId: 81,
-          defaultImage: {
-            altText: '',
-            img320px:
-              'https://cdn11.bigcommerce.com/s-w2gk34tjxo/images/stencil/320w/products/81/273/roundterrariumsmall.1599742292.jpg',
-          },
-          plainTextDescription:
-            'This strikingly beautiful terrarium will make a welcome addition to your home bringing some green to the scene. A...',
-        },
-      ],
+      items: [],
       plugin: 'big-commerce',
     },
   }
 
-  const res_5 = await instance
+  const resHomeEntry = await instance
     .put(`/stories/${homeStory.id}`, { story: homeStory })
     .catch((error) => console.error(error))
-  console.log('Seed: Home Content Entry configured')
+  console.log('Seed: Home Content configured')
 
   // 5. Configure Space with correct preview Domain
   const { data } = await instance.get().catch((error) => console.error(error))

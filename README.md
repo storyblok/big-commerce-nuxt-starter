@@ -119,7 +119,7 @@ You can generate a deployable directory `dist` by running the following command.
 npm run generate
 ```
 
-Then yo can deploy this directory with the netlify cli. Make sure to change the storeToken `nuxt.config.js` to the correct Domain token. You will probably need to generate a different token for your production site.
+Then you can deploy this directory with the netlify cli. Make sure to change the storeToken `nuxt.config.js` to the correct Domain token. You will probably need to generate a different token for your production site.
 
 ```bash
 netlify deploy --dir=dist
