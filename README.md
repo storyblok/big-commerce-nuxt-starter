@@ -23,6 +23,8 @@ Demo: <a href="https://big-commerce-demo.netlify.app/">big-commerce-demo.netlify
 - [About](#about)
 - [Getting Started](#getting_started)
 - [Built Using](#built_using)
+- [Deployment](#deployment)
+
 
 
 ## 🧐 About <a name = "about"></a>
@@ -109,6 +111,19 @@ node seed.js --space=12345
 In order to connect to BigCommerce and import the products, you will need to install the Custom Field Types. 
 
 
+## Deployment <a name = "deployment"></a>
+
+You can generate a deployable directory `dist` by running the following command.
+
+```bash
+npm run generate
+```
+
+Then yo can deploy this directory with the netlify cli. Make sure to change the storeToken `nuxt.config.js` to the correct Domain token. You will probably need to generate a different token for your production site.
+
+```bash
+netlify deploy --dir=dist
+```
 
 ## ⛏️ Built Using <a name = "built_using"></a>
 
