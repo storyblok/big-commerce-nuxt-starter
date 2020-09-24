@@ -1,8 +1,7 @@
 export default {
   env: {
-    storeUrl: 'https://storyblok-partner-demo-store.mybigcommerce.com',
-    storeToken:
-      'eyJ0eXAiOiJKV1QiLCJhbGciOiJFUzI1NiJ9.eyJlYXQiOjE2MDIyODgwMDAsInN1Yl90eXBlIjoyLCJ0b2tlbl90eXBlIjoxLCJjb3JzIjpbImh0dHA6Ly9sb2NhbGhvc3Q6MzAwMCJdLCJjaWQiOjEsImlhdCI6MTYwMDMzMzc4MCwic3ViIjoiaGE0MWI4bWg0eXFucDR6Zzc0MjVrOGNqNWgxZXhkMiIsInNpZCI6MTAwMTM4NjY2MywiaXNzIjoiQkMifQ.paJ1vWsCUsU3YPws8cSA4we9SCmmszuP8V28Zw0F6o-3aOsTc4_iq0D7eLZ6IfmCJs8BRshslrJb0B8b0eLYJA',
+    storeUrl: 'https://demo-store.mybigcommerce.com',
+    storeToken: 'secret-token',
   },
 
   /*
@@ -61,7 +60,7 @@ export default {
   modules: [
     [
       'storyblok-nuxt',
-      { accessToken: 'prAAnQLVku7ag5v1gbyYywtt', cacheProvider: 'memory' },
+      { accessToken: 'access-token', cacheProvider: 'memory' },
     ],
   ],
   /*

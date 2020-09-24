@@ -1,6 +1,10 @@
 <h1 align="center">Storyblok BigCommerce Shop Template</h1>
 
 <p align="center">
+Demo: <a href="https://big-commerce-demo.netlify.app/">big-commerce-demo.netlify.app</a>
+</p>
+
+<p align="center">
   <a href="https://www.storyblok.com/" rel="noopener">
  <img width=150px src="https://a.storyblok.com/f/51376/3856x824/fea44d52a9/colored-full.png" alt="Storyblok" style="display:inline-block;margin:20px;"></a>
   <a href="https://www.bigcommerce.com/" rel="noopener">
