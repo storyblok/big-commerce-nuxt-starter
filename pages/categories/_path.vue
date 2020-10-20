@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import { getProductsByCategory } from '../../plugins/bigCommerceApi'
+import { getProductsByPath } from '../../plugins/graphql-bigcommerce'
 import Category from '~/components/Category.vue'
 
 export default {
@@ -14,7 +14,6 @@ export default {
   },
   data() {
     return {
-      products: [],
       category: {},
       error: null,
     }
@@ -22,7 +21,7 @@ export default {
   async mounted() {
     try {
       const categoryPath = this.$route.params.path
-      const res = await this.getProductsByCategory(`/${categoryPath}/`)
+      const res = await getProductsByPath(categoryPath)
       if (res) {
         this.category = res.site.route.node
       }
@@ -30,6 +29,5 @@ export default {
       this.error = error
     }
   },
-  methods: { getProductsByCategory },
 }
 </script>

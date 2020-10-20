@@ -3,6 +3,27 @@
     v-if="product"
     class="text-gray-700 body-font overflow-hidden bg-white"
   >
+    <div
+      v-if="story.content"
+      v-editable="story.content"
+      class="container px-5 py-24 mx-auto text-center flex flex-col items-center"
+    >
+      <h1 class="text-4xl font-bold mb-8">{{ story.content.name }}</h1>
+      <div>
+        <span class="text-3xl text-primary text-left leading-tight h-3 block"
+          >“</span
+        >
+        <p
+          class="text-lg text-gray-600 px-5"
+          v-html="$storyapi.richTextResolver.render(story.content.description)"
+        />
+        <span
+          class="text-3xl text-primary text-right leading-tight h-3 block -mt-3"
+        >
+          ”
+        </span>
+      </div>
+    </div>
     <div class="container px-5 py-24 mx-auto">
       <div class="lg:w-4/5 mx-auto flex flex-wrap">
         <img
@@ -11,13 +32,13 @@
           :src="product.defaultImage.img1280px"
         />
         <div class="lg:w-1/2 w-full lg:pl-10 lg:py-6 mt-6 lg:mt-0">
-          <h2 class="text-sm title-font text-gray-500 tracking-widest">
+          <p class="text-sm title-font text-gray-500 tracking-widest">
             <span
               v-for="category in product.categories.edges"
               :key="category.node.name"
               >{{ category.node.name }} -</span
             >
-          </h2>
+          </p>
           <h1 class="text-gray-900 text-3xl title-font font-medium mb-1">
             {{ product.name }}
           </h1>
@@ -59,28 +80,54 @@
 </template>
 
 <script>
-import { getProductInfo } from '../../plugins/bigCommerceApi'
+import { getProductById } from '../../plugins/graphql-bigcommerce'
 
 export default {
   data() {
     return {
       product: null,
+      story: {},
       error: null,
     }
   },
   async mounted() {
+    const productId = this.$route.params.id
+
+    // get eCommerce Product
     try {
-      const res = await this.getProductInfo(this.$route.params.id)
-      if (res) {
-        this.product = res.site.product
-        console.log(this.product)
+      const commerceResponse = await getProductById(productId)
+
+      if (commerceResponse) {
+        this.product = commerceResponse.site.product
       }
     } catch (error) {
       this.error = error
     }
-  },
-  methods: {
-    getProductInfo,
+
+    // get Storyblok Product if it exists
+    try {
+      const storyblokResponse = await this.$storyapi.get(
+        `cdn/stories/product/${productId}`,
+        {
+          version: 'draft',
+        }
+      )
+      if (storyblokResponse) {
+        this.story = storyblokResponse.data.story
+
+        this.$storybridge.on(['input', 'published', 'change'], (event) => {
+          if (event.action === 'input') {
+            if (event.story.id === this.story.id) {
+              this.story.content = event.story.content
+            }
+          } else if (!event.slugChanged) {
+            window.location.reload()
+          }
+        })
+      }
+    } catch (error) {
+      console.warn(error)
+    }
   },
 }
 </script>

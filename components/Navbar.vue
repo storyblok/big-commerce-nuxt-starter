@@ -9,7 +9,7 @@
     >
       <div class="flex justify-between items-center">
         <div class="text-2xl font-bold text-gray-800 md:text-3xl">
-          <nuxt-link to="/home"> {{ story.content.title }} </nuxt-link>
+          <nuxt-link to="/"> {{ story.content.title }} </nuxt-link>
         </div>
         <div class="md:hidden">
           <button
@@ -28,7 +28,10 @@
           </button>
         </div>
       </div>
-      <div class="flex flex-col md:flex-row hidden md:block -mx-2">
+      <div
+        v-if="story.content.items"
+        class="flex flex-col md:flex-row hidden md:block -mx-2"
+      >
         <nuxt-link
           v-for="item in story.content.items"
           :key="item.name"
@@ -36,6 +39,16 @@
           class="text-gray-800 rounded hover:bg-primary hover:text-gray-100 hover:font-medium py-2 px-2 md:mx-2"
           >{{ item.name }}</nuxt-link
         >
+      </div>
+    </div>
+  </nav>
+  <nav v-else class="bg-white shadow-lg w-full fixed z-20 top-0 left-0">
+    <!-- No Navigation Setting found in Storyblok -->
+    <div
+      class="md:flex container w-full mx-auto items-center justify-between py-2"
+    >
+      <div class="text-2xl font-bold text-gray-800 md:text-3xl">
+        <nuxt-link to="/"> My Brand </nuxt-link>
       </div>
     </div>
   </nav>
@@ -54,16 +67,6 @@ export default {
         version: 'draft',
       })
       this.story = response.data.story
-
-      this.$storybridge.on(['input', 'published', 'change'], (event) => {
-        if (event.action === 'input') {
-          if (event.story.id === this.story.id) {
-            this.story.content = event.story.content
-          }
-        } else if (!event.slugChanged) {
-          window.location.reload()
-        }
-      })
     } catch (error) {
       this.error = error
     }

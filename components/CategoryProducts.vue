@@ -5,7 +5,7 @@
       <h1
         class="text-lg text-center uppercase tracking-wider font-semibold text-gray-800 md:text-xl"
       >
-        {{ blok.heading }}
+        {{ blok.headline }}
       </h1>
       <Category
         v-for="category in blok.items.items"

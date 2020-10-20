@@ -1,32 +1,33 @@
 <template>
   <div v-if="story.content">
-    <component
-      :is="`blok-${dashify(component.component)}`"
-      v-for="component in story.content.body"
-      :key="component._uid"
-      :blok="component"
-    ></component>
+    <template v-for="component in story.content.body">
+      <component
+        :is="`blok-${dashify(component.component)}`"
+        v-if="
+          availableComponents.includes(`blok-${dashify(component.component)}`)
+        "
+        :key="component._uid"
+        :blok="component"
+      ></component>
+      <Placeholder v-else :key="component._uid" :blok="component" />
+    </template>
   </div>
 </template>
 
 <script>
 import dashify from 'dashify'
-import Products from '~/components/Products.vue'
-import Category from '~/components/Category.vue'
-import Feature from '~/components/Feature.vue'
+import { availableComponents } from '../plugins/components'
+import Placeholder from '../components/Placeholder'
 
 export default {
   components: {
-    Products,
-    Category,
-    Feature,
+    Placeholder,
   },
   data() {
     return {
-      products: [],
       story: {},
-      storeUrl: 'test',
       error: null,
+      availableComponents,
     }
   },
   async mounted() {

@@ -2,7 +2,7 @@
   <div v-if="category" class="max-w-screen my-20 container mx-auto">
     <div v-if="error">{{ error }}</div>
     <template v-else>
-      <nuxt-link :to="`/categories${category.path}`">
+      <nuxt-link :to="`/categories${categoryPath}`">
         <h1 class="text-4xl font-semibold text-gray-800 md:text-5xl">
           {{ category.name }}
         </h1>
@@ -14,7 +14,11 @@
 
 <script>
 import strShorten from 'str_shorten'
-import { getProductsByCategory } from '../plugins/bigCommerceApi'
+import {
+  getProductsByPath,
+  getCategoryPath,
+  getProductsByCategory,
+} from '../plugins/graphql-bigcommerce'
 
 export default {
   props: {
@@ -24,15 +28,25 @@ export default {
   data() {
     return { products: [] }
   },
+  asyncComputed: {
+    async categoryPath() {
+      return await getCategoryPath(this.category.id)
+    },
+  },
   async mounted() {
-    const res = await this.getProductsByCategory(this.category.path)
+    const activeFunction = this.category.path
+      ? getProductsByPath
+      : getProductsByCategory
+    const activeParam = this.category.path
+      ? this.category.path
+      : this.category.id
+    const res = await activeFunction(activeParam)
     if (res) {
       this.products = res.site.route.node.products.edges.map((e) => e.node)
     }
   },
   methods: {
     strShorten,
-    getProductsByCategory,
   },
 }
 </script>

@@ -1,14 +1,14 @@
 <template>
   <section
-    v-editable="blok"
     v-if="product"
+    v-editable="blok"
     class="text-gray-700 body-font overflow-hidden bg-white"
   >
     <div class="container py-24 mx-auto">
       <h1
         class="text-lg text-center uppercase tracking-wider font-semibold text-gray-800 md:text-xl"
       >
-        {{ blok.heading }}
+        {{ blok.headline }}
       </h1>
       <div class="flex flex-wrap items-center justify-start mt-16">
         <img
@@ -29,6 +29,12 @@
               class="text-white bg-primary border-0 py-2 px-6 uppercase focus:outline-none hover:bg-gray-900 rounded"
               >Buy it now</a
             >
+            <nuxt-link
+              :key="product.entityId"
+              class="text-white bg-blue-900 border-0 py-2 px-6 uppercase focus:outline-none hover:bg-gray-900 rounded"
+              :to="`/product/${product.entityId}`"
+              >Learn More</nuxt-link
+            >
           </div>
         </div>
       </div>
@@ -38,7 +44,7 @@
 
 <script>
 import strShorten from 'str_shorten'
-import { getProductInfo } from '../plugins/bigCommerceApi'
+import { getProductById } from '../plugins/graphql-bigcommerce'
 
 export default {
   props: {
@@ -58,7 +64,7 @@ export default {
   },
   async mounted() {
     try {
-      const res = await this.getProductInfo(this.blok.product.items[0].entityId)
+      const res = await getProductById(this.blok.product.items[0].id)
       if (res) {
         this.product = res.site.product
       }
@@ -67,7 +73,6 @@ export default {
     }
   },
   methods: {
-    getProductInfo,
     strShorten,
   },
 }

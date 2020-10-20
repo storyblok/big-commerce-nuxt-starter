@@ -5,7 +5,7 @@
       <h1
         class="text-lg text-center uppercase tracking-wider font-semibold text-gray-800 md:text-xl"
       >
-        {{ blok.heading }}
+        {{ blok.headline }}
       </h1>
       <ProductSlider :products="fullProducts" />
     </template>
@@ -15,7 +15,7 @@
 <script>
 import strShorten from 'str_shorten'
 
-import { getProducts } from '../plugins/bigCommerceApi'
+import { getProducts } from '../plugins/graphql-bigcommerce'
 import ProductSlider from './ProductSlider'
 
 export default {
@@ -30,7 +30,7 @@ export default {
     }
   },
   async mounted() {
-    const ids = this.blok.items.items.map((p) => p.entityId)
+    const ids = this.blok.products.items.map((p) => p.id)
     const res = await this.getProducts(ids)
     if (res) {
       this.fullProducts = res.site.products.edges.map((e) => e.node)
