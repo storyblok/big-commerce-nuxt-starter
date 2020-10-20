@@ -195,13 +195,14 @@ export async function getProducts({
 }
 
 export async function getProductsById({
-  perPage,
+  perPage = 50,
   cursor,
   direction = 'after',
   ids,
 }) {
   let cursorString = ''
   let dir = 'first'
+  const stringIds = ids.join(',')
 
   if (cursor && cursor.length) {
     if (direction === 'before') dir = 'last'
@@ -211,7 +212,7 @@ export async function getProductsById({
   const graphQLQuery = `
     query ProductsById {
       site {
-        products(entityIds: [${ids}], ${dir}: ${perPage}${cursorString}) {
+        products(entityIds: [${stringIds}], ${dir}: ${perPage}${cursorString}) {
           pageInfo {
             startCursor
             endCursor

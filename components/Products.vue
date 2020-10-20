@@ -15,7 +15,7 @@
 <script>
 import strShorten from 'str_shorten'
 
-import { getProducts } from '../plugins/graphql-bigcommerce'
+import { getProductsById } from '../plugins/graphql-bigcommerce'
 import ProductSlider from './ProductSlider'
 
 export default {
@@ -30,15 +30,17 @@ export default {
     }
   },
   async mounted() {
-    const ids = this.blok.products.items.map((p) => p.id)
-    const res = await this.getProducts(ids)
+    const ids =
+      this.blok.products && this.blok.products.items.length
+        ? this.blok.products.items.map((p) => p.id)
+        : []
+    const res = await getProductsById({ ids })
     if (res) {
       this.fullProducts = res.site.products.edges.map((e) => e.node)
     }
   },
   methods: {
     strShorten,
-    getProducts,
   },
 }
 </script>
