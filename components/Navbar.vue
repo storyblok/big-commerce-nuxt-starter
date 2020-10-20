@@ -61,15 +61,29 @@ export default {
       story: {},
     }
   },
-  async mounted() {
-    try {
-      const response = await this.$storyapi.get('cdn/stories/navigation', {
+  asyncData(context) {
+    return context.app.$storyapi
+      .get('cdn/stories/navigation', {
         version: 'draft',
       })
-      this.story = response.data.story
-    } catch (error) {
-      this.error = error
-    }
+      .then((res) => {
+        return res.data
+      })
+      .catch((res) => {
+        if (!res.response) {
+          console.error(res)
+          context.error({
+            statusCode: 404,
+            message: 'Failed to receive content form api',
+          })
+        } else {
+          console.error(res.response.data)
+          context.error({
+            statusCode: res.response.status,
+            message: res.response.data,
+          })
+        }
+      })
   },
 }
 </script>

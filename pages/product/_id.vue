@@ -83,6 +83,27 @@
 import { getProductById } from '../../plugins/graphql-bigcommerce'
 
 export default {
+  async asyncData(context) {
+    let story = {}
+    try {
+      const { data } = await context.app.$storyapi.get(
+        `cdn/stories/product/${context.params.id}`,
+        {
+          version: 'draft',
+        }
+      )
+      story = data.story
+    } catch (e) {
+      console.warn(e)
+    }
+
+    const commerceResponse = await getProductById(context.params.id)
+
+    return {
+      story,
+      product: commerceResponse.site.product,
+    }
+  },
   data() {
     return {
       product: null,
@@ -90,44 +111,16 @@ export default {
       error: null,
     }
   },
-  async mounted() {
-    const productId = this.$route.params.id
-
-    // get eCommerce Product
-    try {
-      const commerceResponse = await getProductById(productId)
-
-      if (commerceResponse) {
-        this.product = commerceResponse.site.product
-      }
-    } catch (error) {
-      this.error = error
-    }
-
-    // get Storyblok Product if it exists
-    try {
-      const storyblokResponse = await this.$storyapi.get(
-        `cdn/stories/product/${productId}`,
-        {
-          version: 'draft',
+  mounted() {
+    this.$storybridge.on(['input', 'published', 'change'], (event) => {
+      if (event.action === 'input') {
+        if (event.story.id === this.story.id) {
+          this.story.content = event.story.content
         }
-      )
-      if (storyblokResponse) {
-        this.story = storyblokResponse.data.story
-
-        this.$storybridge.on(['input', 'published', 'change'], (event) => {
-          if (event.action === 'input') {
-            if (event.story.id === this.story.id) {
-              this.story.content = event.story.content
-            }
-          } else if (!event.slugChanged) {
-            window.location.reload()
-          }
-        })
+      } else if (!event.slugChanged) {
+        window.location.reload()
       }
-    } catch (error) {
-      console.warn(error)
-    }
+    })
   },
 }
 </script>

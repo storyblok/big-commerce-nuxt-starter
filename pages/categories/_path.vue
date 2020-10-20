@@ -12,21 +12,18 @@ export default {
   components: {
     Category,
   },
+  async asyncData(context) {
+    const categoryPath = context.params.path
+    const res = await getProductsByPath(categoryPath)
+
+    return {
+      category: res.site.route.node,
+    }
+  },
   data() {
     return {
       category: {},
       error: null,
-    }
-  },
-  async mounted() {
-    try {
-      const categoryPath = this.$route.params.path
-      const res = await getProductsByPath(categoryPath)
-      if (res) {
-        this.category = res.site.route.node
-      }
-    } catch (error) {
-      this.error = error
     }
   },
 }

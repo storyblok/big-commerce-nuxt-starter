@@ -24,9 +24,9 @@
       style="clip-path: polygon(10% 0, 100% 0%, 100% 100%, 0 100%)"
     >
       <div
-        class="h-full object-cover"
+        class="h-full object-cover relative"
         :style="`
-          background-image: url(${blok.image.filename});
+          background-image: url(${imgUrl});
         `"
       >
         <div class="h-full bg-black opacity-25"></div>
@@ -38,5 +38,13 @@
 <script>
 export default {
   props: ['blok'],
+  computed: {
+    imgUrl() {
+      const imageUrl = this.blok.image.filename
+        .replace('https://a', 'https://img2')
+        .replace('k.com/', 'k.com/800x800/')
+      return imageUrl
+    },
+  },
 }
 </script>

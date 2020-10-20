@@ -1,17 +1,17 @@
 export default {
   env: {
     storeUrl: 'https://storyblok-partner-demo-store.mybigcommerce.com',
-    // storeToken:
-    // 'eyJ0eXAiOiJKV1QiLCJhbGciOiJFUzI1NiJ9.eyJlYXQiOjE2MzkyNjcyMDAsInN1Yl90eXBlIjoyLCJ0b2tlbl90eXBlIjoxLCJjb3JzIjpbImh0dHBzOi8vYmlnLWNvbW1lcmNlLWRlbW8ubmV0bGlmeS5hcHAiXSwiY2lkIjoxLCJpYXQiOjE2MDEzOTE0ODgsInN1YiI6ImhhNDFiOG1oNHlxbnA0emc3NDI1azhjajVoMWV4ZDIiLCJzaWQiOjEwMDEzODY2NjMsImlzcyI6IkJDIn0.veRBqqAd0XtXKJ-FI7w-kGlj3NdK386MtZv5LZxIP3eba9AMpbEKMp9FB79Gpe92F9S64SgpDah2vgDPhRpagQ',
     storeToken:
-      'eyJ0eXAiOiJKV1QiLCJhbGciOiJFUzI1NiJ9.eyJlYXQiOjE2MzkyNjcyMDAsInN1Yl90eXBlIjoyLCJ0b2tlbl90eXBlIjoxLCJjb3JzIjpbImh0dHA6Ly9sb2NhbGhvc3Q6MzAwMCJdLCJjaWQiOjEsImlhdCI6MTYwMzE4NTIxNCwic3ViIjoiaGE0MWI4bWg0eXFucDR6Zzc0MjVrOGNqNWgxZXhkMiIsInNpZCI6MTAwMTM4NjY2MywiaXNzIjoiQkMifQ.IdYuHyWui75Uv8wVWh5-PhHwrX-iSoacP8JeNMttFFR-79485VoiwBvhRrVlsNtEd6lAPBW56h2ID7bNp_66zA',
+      'eyJ0eXAiOiJKV1QiLCJhbGciOiJFUzI1NiJ9.eyJlYXQiOjE2MzkyNjcyMDAsInN1Yl90eXBlIjoyLCJ0b2tlbl90eXBlIjoxLCJjb3JzIjpbImh0dHBzOi8vYmlnLWNvbW1lcmNlLWRlbW8ubmV0bGlmeS5hcHAiXSwiY2lkIjoxLCJpYXQiOjE2MDMxOTM1ODgsInN1YiI6ImhhNDFiOG1oNHlxbnA0emc3NDI1azhjajVoMWV4ZDIiLCJzaWQiOjEwMDEzODY2NjMsImlzcyI6IkJDIn0.TDmurFwUjWASqpKnCcrOwpXarAHnN0FQfulQtblWz70YdG_o4paGkKon8cmrwwZC5qGeM_gxsIRMdzZvBckHXA',
+    // storeToken:
+    //  'eyJ0eXAiOiJKV1QiLCJhbGciOiJFUzI1NiJ9.eyJlYXQiOjE2MzkyNjcyMDAsInN1Yl90eXBlIjoyLCJ0b2tlbl90eXBlIjoxLCJjb3JzIjpbImh0dHA6Ly9sb2NhbGhvc3Q6MzAwMCJdLCJjaWQiOjEsImlhdCI6MTYwMzE4NTIxNCwic3ViIjoiaGE0MWI4bWg0eXFucDR6Zzc0MjVrOGNqNWgxZXhkMiIsInNpZCI6MTAwMTM4NjY2MywiaXNzIjoiQkMifQ.IdYuHyWui75Uv8wVWh5-PhHwrX-iSoacP8JeNMttFFR-79485VoiwBvhRrVlsNtEd6lAPBW56h2ID7bNp_66zA',
   },
 
   /*
    ** Nuxt rendering mode
    ** See https://nuxtjs.org/api/configuration-mode
    */
-  mode: 'spa',
+  mode: 'universal',
   /*
    ** Nuxt target
    ** See https://nuxtjs.org/api/configuration-target
@@ -57,6 +57,10 @@ export default {
     // Doc: https://github.com/nuxt-community/nuxt-tailwindcss
     '@nuxtjs/tailwindcss',
   ],
+
+  generate: {
+    fallback: true,
+  },
   /*
    ** Nuxt.js modules
    */

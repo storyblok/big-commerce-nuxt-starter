@@ -13,7 +13,7 @@
         class="mt-3 py-3 -mx-3 overflow-y-auto whitespace-no-wrap scroll-hidden"
       >
         <nuxt-link
-          v-for="category in apiCategories"
+          v-for="category in categories"
           :key="category.id"
           :to="`/categories${category.path}`"
           class="text-sm text-white leading-5 no-underline py-3 px-4 font-medium mr-3 bg-primary hover:bg-gray-900"
@@ -30,14 +30,19 @@ import { categoriesByIds } from '../plugins/graphql-bigcommerce'
 
 export default {
   props: ['blok', 'error'],
-  asyncComputed: {
-    apiCategories: {
-      get() {
-        const ids = this.blok.categories.items.map((i) => i.id)
-        return categoriesByIds(ids)
-      },
-      default: [],
-    },
+  data() {
+    return {
+      categories: [],
+    }
+  },
+  async asyncData(context) {
+    const ids = context.blok.categories.items.map((i) => i.id)
+    const categories = await categoriesByIds(ids)
+    return { categories }
+  },
+  async mounted() {
+    const ids = this.blok.categories.items.map((i) => i.id)
+    this.categories = await categoriesByIds(ids)
   },
 }
 </script>

@@ -23,6 +23,30 @@ export default {
   components: {
     Placeholder,
   },
+  asyncData(context) {
+    return context.app.$storyapi
+      .get('cdn/stories/home', {
+        version: 'draft',
+      })
+      .then((res) => {
+        return res.data
+      })
+      .catch((res) => {
+        if (!res.response) {
+          console.error(res)
+          context.error({
+            statusCode: 404,
+            message: 'Failed to receive content from api',
+          })
+        } else {
+          console.error(res.response.data)
+          context.error({
+            statusCode: res.response.status,
+            message: res.response.data,
+          })
+        }
+      })
+  },
   data() {
     return {
       story: {},
@@ -30,26 +54,16 @@ export default {
       availableComponents,
     }
   },
-  async mounted() {
-    try {
-      const response = await this.$storyapi.get('cdn/stories/home', {
-        version: 'draft',
-      })
-      this.story = response.data.story
-      console.log('story', this.story) // eslint-disable-line
-
-      this.$storybridge.on(['input', 'published', 'change'], (event) => {
-        if (event.action === 'input') {
-          if (event.story.id === this.story.id) {
-            this.story.content = event.story.content
-          }
-        } else if (!event.slugChanged) {
-          window.location.reload()
+  mounted() {
+    this.$storybridge.on(['input', 'published', 'change'], (event) => {
+      if (event.action === 'input') {
+        if (event.story.id === this.story.id) {
+          this.story.content = event.story.content
         }
-      })
-    } catch (error) {
-      this.error = error
-    }
+      } else {
+        window.location.reload()
+      }
+    })
   },
   methods: {
     dashify,

@@ -2,11 +2,9 @@
   <div v-if="category" class="max-w-screen my-20 container mx-auto">
     <div v-if="error">{{ error }}</div>
     <template v-else>
-      <nuxt-link :to="`/categories${categoryPath}`">
-        <h1 class="text-4xl font-semibold text-gray-800 md:text-5xl">
-          {{ category.name }}
-        </h1>
-      </nuxt-link>
+      <h1 class="text-4xl font-semibold text-gray-800 md:text-5xl">
+        {{ category.name }}
+      </h1>
       <ProductSlider :products="products" />
     </template>
   </div>
@@ -16,7 +14,6 @@
 import strShorten from 'str_shorten'
 import {
   getProductsByPath,
-  getCategoryPath,
   getProductsByCategory,
 } from '../plugins/graphql-bigcommerce'
 
@@ -27,11 +24,6 @@ export default {
   },
   data() {
     return { products: [] }
-  },
-  asyncComputed: {
-    async categoryPath() {
-      return await getCategoryPath(this.category.id)
-    },
   },
   async mounted() {
     const activeFunction = this.category.path

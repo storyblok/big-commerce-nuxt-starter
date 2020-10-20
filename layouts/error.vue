@@ -8,8 +8,8 @@
     <div v-else>
       <h1 class="text-red-400 font-bold">An error occurred</h1>
     </div>
-    <n-link to="/" class="text-primary underline mt-8 block"
-      >Back to Home page</n-link
+    <nuxt-link to="/" class="text-primary underline mt-8 block"
+      >Back to Home page</nuxt-link
     >
   </div>
 </template>
