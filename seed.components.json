@@ -1,251 +1,263 @@
 {
-  "components": [
-    {
-      "name": "Categories Bar",
-      "display_name": null,
-      "created_at": "2020-09-21T13:53:43.531Z",
-      "updated_at": "2020-09-22T10:17:02.189Z",
-      "id": 1109351,
-      "schema": {
-        "title": {
-          "type": "text",
-          "pos": 0
-        },
-        "categories": {
-          "type": "custom",
-          "field_type": "big-commerce-categories",
-          "options": [
-            {
-              "name": "endpoint",
-              "value": "https://storyblok-partner-demo-store.mybigcommerce.com"
+    "components": [{
+            "name": "hero",
+            "display_name": "Hero",
+            "created_at": "2020-11-18T10:00:40.947Z",
+            "updated_at": "2020-11-19T08:34:54.498Z",
+            "id": 1197668,
+            "schema": {
+                "headline": {
+                    "type": "text"
+                },
+                "description": {
+                    "type": "richtext"
+                },
+                "link": {
+                    "type": "multilink"
+                },
+                "image": {
+                    "type": "asset",
+                    "filetypes": [
+                        "images"
+                    ]
+                }
             },
-            {
-              "name": "token",
-              "value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJFUzI1NiJ9.eyJlYXQiOjE2MDIyODgwMDAsInN1Yl90eXBlIjoyLCJ0b2tlbl90eXBlIjoxLCJjb3JzIjpbImh0dHBzOi8vcGx1Z2lucy5zdG9yeWJsb2suY29tIl0sImNpZCI6MSwiaWF0IjoxNjAwNzY2OTk5LCJzdWIiOiJoYTQxYjhtaDR5cW5wNHpnNzQyNWs4Y2o1aDFleGQyIiwic2lkIjoxMDAxMzg2NjYzLCJpc3MiOiJCQyJ9.5iUElub-iMX_n45SiflolXH8GVuVS58oZ_Up2A5TLZa2qCKdYPm-Pv7pXjb9kvREXBu6Fi1fvs40HTY9HzDnXw"
-            }
-          ],
-          "pos": 1
-        }
-      },
-      "image": null,
-      "preview_field": null,
-      "is_root": false,
-      "preview_tmpl": null,
-      "is_nestable": true,
-      "all_presets": [],
-      "preset_id": null,
-      "real_name": "Categories Bar",
-      "component_group_uuid": null
-    },
-    {
-      "name": "Category products",
-      "display_name": null,
-      "created_at": "2020-09-22T11:19:50.537Z",
-      "updated_at": "2020-09-22T11:20:13.753Z",
-      "id": 1110926,
-      "schema": {
-        "heading": {
-          "type": "text"
+            "image": null,
+            "preview_field": null,
+            "is_root": false,
+            "preview_tmpl": null,
+            "is_nestable": true,
+            "all_presets": [],
+            "preset_id": null,
+            "real_name": "Hero",
+            "component_group_uuid": null
         },
-        "items": {
-          "type": "custom",
-          "field_type": "big-commerce-categories",
-          "options": [
-            {
-              "name": "endpoint",
-              "value": "https://storyblok-partner-demo-store.mybigcommerce.com"
+        {
+            "name": "page",
+            "display_name": "Page",
+            "created_at": "2020-11-18T10:00:41.566Z",
+            "updated_at": "2020-11-18T10:02:50.506Z",
+            "id": 1197670,
+            "schema": {
+                "body": {
+                    "type": "bloks",
+                    "pos": 0
+                }
             },
-            {
-              "name": "token",
-              "value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJFUzI1NiJ9.eyJlYXQiOjE2MDIyODgwMDAsInN1Yl90eXBlIjoyLCJ0b2tlbl90eXBlIjoxLCJjb3JzIjpbImh0dHBzOi8vcGx1Z2lucy5zdG9yeWJsb2suY29tIl0sImNpZCI6MSwiaWF0IjoxNjAwNzY2OTk5LCJzdWIiOiJoYTQxYjhtaDR5cW5wNHpnNzQyNWs4Y2o1aDFleGQyIiwic2lkIjoxMDAxMzg2NjYzLCJpc3MiOiJCQyJ9.5iUElub-iMX_n45SiflolXH8GVuVS58oZ_Up2A5TLZa2qCKdYPm-Pv7pXjb9kvREXBu6Fi1fvs40HTY9HzDnXw"
-            }
-          ]
-        }
-      },
-      "image": null,
-      "preview_field": null,
-      "is_root": false,
-      "preview_tmpl": null,
-      "is_nestable": true,
-      "all_presets": [],
-      "preset_id": null,
-      "real_name": "Category products",
-      "component_group_uuid": null
-    },
-    {
-      "name": "Feature",
-      "display_name": null,
-      "created_at": "2020-09-22T11:16:54.398Z",
-      "updated_at": "2020-09-22T11:17:25.602Z",
-      "id": 1110924,
-      "schema": {
-        "heading": {
-          "type": "text"
+            "image": null,
+            "preview_field": null,
+            "is_root": true,
+            "preview_tmpl": null,
+            "is_nestable": false,
+            "all_presets": [],
+            "preset_id": null,
+            "real_name": "Page",
+            "component_group_uuid": null
         },
-        "product": {
-          "type": "custom",
-          "field_type": "big-commerce",
-          "options": [
-            {
-              "name": "endpoint",
-              "value": "https://storyblok-partner-demo-store.mybigcommerce.com"
+        {
+            "name": "product",
+            "display_name": "Product",
+            "created_at": "2020-11-18T10:00:43.407Z",
+            "updated_at": "2020-11-18T10:02:44.616Z",
+            "id": 1197676,
+            "schema": {
+                "name": {
+                    "type": "text",
+                    "pos": 0,
+                    "required": false
+                },
+                "description": {
+                    "type": "richtext",
+                    "pos": 3
+                }
             },
-            {
-              "name": "token",
-              "value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJFUzI1NiJ9.eyJlYXQiOjE2MDIyODgwMDAsInN1Yl90eXBlIjoyLCJ0b2tlbl90eXBlIjoxLCJjb3JzIjpbImh0dHBzOi8vcGx1Z2lucy5zdG9yeWJsb2suY29tIl0sImNpZCI6MSwiaWF0IjoxNjAwNzY2OTk5LCJzdWIiOiJoYTQxYjhtaDR5cW5wNHpnNzQyNWs4Y2o1aDFleGQyIiwic2lkIjoxMDAxMzg2NjYzLCJpc3MiOiJCQyJ9.5iUElub-iMX_n45SiflolXH8GVuVS58oZ_Up2A5TLZa2qCKdYPm-Pv7pXjb9kvREXBu6Fi1fvs40HTY9HzDnXw"
-            }
-          ]
-        }
-      },
-      "image": null,
-      "preview_field": null,
-      "is_root": false,
-      "preview_tmpl": null,
-      "is_nestable": true,
-      "all_presets": [],
-      "preset_id": null,
-      "real_name": "Feature",
-      "component_group_uuid": null
-    },
-    {
-      "name": "link",
-      "display_name": null,
-      "created_at": "2020-09-17T10:24:31.028Z",
-      "updated_at": "2020-09-17T10:25:06.488Z",
-      "id": 1104303,
-      "schema": {
-        "name": {
-          "type": "text"
+            "image": null,
+            "preview_field": null,
+            "is_root": true,
+            "preview_tmpl": null,
+            "is_nestable": false,
+            "all_presets": [],
+            "preset_id": null,
+            "real_name": "Product",
+            "component_group_uuid": null
         },
-        "url": {
-          "type": "multilink",
-          "show_anchor": true
-        }
-      },
-      "image": null,
-      "preview_field": null,
-      "is_root": false,
-      "preview_tmpl": null,
-      "is_nestable": true,
-      "all_presets": [],
-      "preset_id": null,
-      "real_name": "link",
-      "component_group_uuid": null
-    },
-    {
-      "name": "navigation",
-      "display_name": null,
-      "created_at": "2020-09-18T13:17:25.693Z",
-      "updated_at": "2020-09-21T09:15:04.648Z",
-      "id": 1106406,
-      "schema": {
-        "title": {
-          "type": "text"
-        },
-        "items": {
-          "type": "bloks"
-        }
-      },
-      "image": null,
-      "preview_field": null,
-      "is_root": true,
-      "preview_tmpl": null,
-      "is_nestable": false,
-      "all_presets": [],
-      "preset_id": null,
-      "real_name": "navigation",
-      "component_group_uuid": null
-    },
-    {
-      "name": "page",
-      "display_name": null,
-      "created_at": "2020-09-15T15:16:41.163Z",
-      "updated_at": "2020-09-22T11:20:52.213Z",
-      "id": 1100716,
-      "schema": {
-        "body": {
-          "type": "bloks",
-          "pos": 0
-        }
-      },
-      "image": null,
-      "preview_field": null,
-      "is_root": true,
-      "preview_tmpl": null,
-      "is_nestable": false,
-      "all_presets": [],
-      "preset_id": null,
-      "real_name": "page",
-      "component_group_uuid": null
-    },
-    {
-      "name": "Products",
-      "display_name": null,
-      "created_at": "2020-09-22T11:17:55.884Z",
-      "updated_at": "2020-09-22T11:18:22.734Z",
-      "id": 1110925,
-      "schema": {
-        "heading": {
-          "type": "text"
-        },
-        "items": {
-          "type": "custom",
-          "field_type": "big-commerce",
-          "options": [
-            {
-              "name": "endpoint",
-              "value": "https://storyblok-partner-demo-store.mybigcommerce.com"
+        {
+            "name": "product-feature",
+            "display_name": "Featured Products",
+            "created_at": "2020-11-18T10:00:40.302Z",
+            "updated_at": "2020-11-18T10:04:31.310Z",
+            "id": 1197666,
+            "schema": {
+                "heading": {
+                    "type": "text"
+                },
+                "product": {
+                    "type": "custom",
+                    "field_type": "big-commerce",
+                    "options": [{
+                            "name": "endpoint",
+                            "value": "https://my-store.mybigcommerce.com"
+                        },
+                        {
+                            "name": "token",
+                            "value": ""
+                        },
+                        {
+                            "value": "product",
+                            "name": "selectOnly"
+                        },
+                        {
+                            "value": "5",
+                            "name": "limit"
+                        }
+                    ]
+                },
+                "layout": {
+                    "type": "option",
+                    "use_uuid": true,
+                    "options": [{
+                            "value": "A",
+                            "name": "A"
+                        },
+                        {
+                            "value": "B",
+                            "name": "B"
+                        },
+                        {
+                            "value": "C",
+                            "name": "C"
+                        },
+                        {
+                            "value": "D",
+                            "name": "D"
+                        }
+                    ],
+                    "default_value": "A"
+                }
             },
-            {
-              "name": "token",
-              "value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJFUzI1NiJ9.eyJlYXQiOjE2MDIyODgwMDAsInN1Yl90eXBlIjoyLCJ0b2tlbl90eXBlIjoxLCJjb3JzIjpbImh0dHBzOi8vcGx1Z2lucy5zdG9yeWJsb2suY29tIl0sImNpZCI6MSwiaWF0IjoxNjAwNzY2OTk5LCJzdWIiOiJoYTQxYjhtaDR5cW5wNHpnNzQyNWs4Y2o1aDFleGQyIiwic2lkIjoxMDAxMzg2NjYzLCJpc3MiOiJCQyJ9.5iUElub-iMX_n45SiflolXH8GVuVS58oZ_Up2A5TLZa2qCKdYPm-Pv7pXjb9kvREXBu6Fi1fvs40HTY9HzDnXw"
-            }
-          ]
+            "image": null,
+            "preview_field": null,
+            "is_root": false,
+            "preview_tmpl": null,
+            "is_nestable": true,
+            "all_presets": [],
+            "preset_id": null,
+            "real_name": "Featured Products",
+            "component_group_uuid": null
+        },
+        {
+            "name": "product-grid",
+            "display_name": "Grid of Products",
+            "created_at": "2020-11-18T10:00:40.649Z",
+            "updated_at": "2020-11-18T10:05:15.246Z",
+            "id": 1197667,
+            "schema": {
+                "categories": {
+                    "type": "custom",
+                    "field_type": "big-commerce",
+                    "options": [{
+                            "value": "category",
+                            "name": "selectOnly"
+                        },
+                        {
+                            "value": "https://my-store.mybigcommerce.com",
+                            "name": "endpoint"
+                        },
+                        {
+                            "value": "",
+                            "name": "token"
+                        }
+                    ]
+                },
+                "products": {
+                    "type": "custom",
+                    "field_type": "big-commerce",
+                    "options": [{
+                            "name": "endpoint",
+                            "value": "https://my-store.mybigcommerce.com"
+                        },
+                        {
+                            "name": "token",
+                            "value": ""
+                        },
+                        {
+                            "name": "limit",
+                            "value": ""
+                        },
+                        {
+                            "name": "selectOnly",
+                            "value": "product"
+                        }
+                    ]
+                }
+            },
+            "image": null,
+            "preview_field": null,
+            "is_root": false,
+            "preview_tmpl": null,
+            "is_nestable": true,
+            "all_presets": [],
+            "preset_id": null,
+            "real_name": "Grid of Products",
+            "component_group_uuid": null
+        },
+        {
+            "name": "product-slider",
+            "display_name": "Slider with Products",
+            "created_at": "2020-11-18T10:00:43.715Z",
+            "updated_at": "2020-11-18T10:04:53.347Z",
+            "id": 1197677,
+            "schema": {
+                "headline": {
+                    "type": "text",
+                    "pos": 1
+                },
+                "products": {
+                    "type": "custom",
+                    "field_type": "big-commerce",
+                    "options": [{
+                            "name": "endpoint",
+                            "value": "https://my-store.mybigcommerce.com"
+                        },
+                        {
+                            "name": "token",
+                            "value": ""
+                        },
+                        {
+                            "name": "limit",
+                            "value": "10"
+                        },
+                        {
+                            "name": "selectOnly",
+                            "value": "product"
+                        }
+                    ],
+                    "pos": 2
+                },
+                "variant": {
+                    "type": "option",
+                    "use_uuid": true,
+                    "options": [{
+                            "value": "primary",
+                            "name": "primary"
+                        },
+                        {
+                            "value": "secondary",
+                            "name": "secondary"
+                        }
+                    ],
+                    "display_name": "primary"
+                }
+            },
+            "image": null,
+            "preview_field": null,
+            "is_root": false,
+            "preview_tmpl": null,
+            "is_nestable": true,
+            "all_presets": [],
+            "preset_id": null,
+            "real_name": "Slider with Products",
+            "component_group_uuid": null
         }
-      },
-      "image": null,
-      "preview_field": null,
-      "is_root": false,
-      "preview_tmpl": null,
-      "is_nestable": true,
-      "all_presets": [],
-      "preset_id": null,
-      "real_name": "Products",
-      "component_group_uuid": null
-    },
-    {
-      "name": "teaser",
-      "display_name": null,
-      "created_at": "2020-09-15T15:16:41.179Z",
-      "updated_at": "2020-09-17T10:15:47.461Z",
-      "id": 1100717,
-      "schema": {
-        "headline": {
-          "type": "text"
-        },
-        "intro_text": {
-          "type": "textarea"
-        },
-        "image": {
-          "type": "asset",
-          "filetypes": [
-            "images"
-          ],
-          "required": false
-        },
-        "button_text": {
-          "type": "text"
-        }
-      },
-      "image": null,
-      "preview_field": null,
-      "is_root": false,
-      "preview_tmpl": null,
-      "is_nestable": true,
-      "all_presets": [],
-      "preset_id": null,
-      "real_name": "teaser",
-      "component_group_uuid": null
-    }
-  ]
+    ]
 }

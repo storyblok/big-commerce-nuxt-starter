@@ -96,15 +96,6 @@ storyblok push-components <SOURCE> --space <SPACE_ID>
 storyblok push-components ./seed.components.json --space 12345
 ```
 
-### Importing Example Content
-
-
-You can just run the seed.js file in this folder to add some basic content for the starter:
-
-```bash
-node seed.js --space=12345
-```
-
 ### Installing the BigCommerce Field Types
 
 
