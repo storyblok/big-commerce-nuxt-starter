@@ -32,7 +32,7 @@
             <nuxt-link
               :key="product.entityId"
               class="text-white bg-blue-900 border-0 py-2 px-6 uppercase focus:outline-none hover:bg-gray-900 rounded"
-              :to="`/product/${product.entityId}`"
+              :to="`/product${product.path}`"
               >Learn More</nuxt-link
             >
           </div>

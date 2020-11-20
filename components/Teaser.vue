@@ -7,14 +7,15 @@
         <h2 class="text-3xl font-semibold text-gray-800 md:text-4xl">
           {{ blok.headline }}
         </h2>
-        <p class="mt-2 text-sm text-gray-500 md:text-base">
-          {{ blok.intro_text }}
-        </p>
+        <div
+          class="mt-2 text-sm text-gray-500 md:text-base"
+          v-html="richtext"
+        />
         <div class="flex justify-center lg:justify-start mt-6">
           <nuxt-link
             class="px-4 py-3 bg-primary text-gray-200 text-xs font-semibold rounded hover:bg-gray-800"
-            to="/categories/shop-all"
-            >{{ blok.button_text }}
+            :to="blok.link.cached_url"
+            >Read more
           </nuxt-link>
         </div>
       </div>
@@ -40,10 +41,15 @@ export default {
   props: ['blok'],
   computed: {
     imgUrl() {
-      const imageUrl = this.blok.image.filename
-        .replace('https://a', 'https://img2')
-        .replace('k.com/', 'k.com/800x800/')
+      const imageUrl = this.blok.image
+        ? this.blok.image.filename
+            .replace('https://a', 'https://img2')
+            .replace('k.com/', 'k.com/800x800/')
+        : ''
       return imageUrl
+    },
+    richtext() {
+      return this.$storyapi.richTextResolver.render(this.blok.description)
     },
   },
 }

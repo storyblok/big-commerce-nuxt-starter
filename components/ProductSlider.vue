@@ -8,7 +8,7 @@
     <nuxt-link
       v-for="product in products"
       :key="product.entityId"
-      :to="`/product/${product.entityId}`"
+      :to="`/product${product.path}`"
     >
       <div
         class="flex-shrink-0 m-6 relative overflow-hidden rounded-lg max-w-xs hover:opacity-50"

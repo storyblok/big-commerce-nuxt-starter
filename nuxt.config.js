@@ -1,10 +1,8 @@
 export default {
   env: {
-    storeUrl: 'https://storyblok-partner-demo-store.mybigcommerce.com',
-    storeToken:
-      'eyJ0eXAiOiJKV1QiLCJhbGciOiJFUzI1NiJ9.eyJlYXQiOjE2MzkyNjcyMDAsInN1Yl90eXBlIjoyLCJ0b2tlbl90eXBlIjoxLCJjb3JzIjpbImh0dHBzOi8vYmlnLWNvbW1lcmNlLWRlbW8ubmV0bGlmeS5hcHAiXSwiY2lkIjoxLCJpYXQiOjE2MDMxOTM1ODgsInN1YiI6ImhhNDFiOG1oNHlxbnA0emc3NDI1azhjajVoMWV4ZDIiLCJzaWQiOjEwMDEzODY2NjMsImlzcyI6IkJDIn0.TDmurFwUjWASqpKnCcrOwpXarAHnN0FQfulQtblWz70YdG_o4paGkKon8cmrwwZC5qGeM_gxsIRMdzZvBckHXA',
-    // storeToken:
-    //  'eyJ0eXAiOiJKV1QiLCJhbGciOiJFUzI1NiJ9.eyJlYXQiOjE2MzkyNjcyMDAsInN1Yl90eXBlIjoyLCJ0b2tlbl90eXBlIjoxLCJjb3JzIjpbImh0dHA6Ly9sb2NhbGhvc3Q6MzAwMCJdLCJjaWQiOjEsImlhdCI6MTYwMzE4NTIxNCwic3ViIjoiaGE0MWI4bWg0eXFucDR6Zzc0MjVrOGNqNWgxZXhkMiIsInNpZCI6MTAwMTM4NjY2MywiaXNzIjoiQkMifQ.IdYuHyWui75Uv8wVWh5-PhHwrX-iSoacP8JeNMttFFR-79485VoiwBvhRrVlsNtEd6lAPBW56h2ID7bNp_66zA',
+    storeUrl:
+      process.env.BIGCOMMERCE_URL || 'https://demo-store.mybigcommerce.com',
+    storeToken: process.env.BIGCOMMERCE_TOKEN || '',
   },
 
   /*
@@ -52,6 +50,7 @@ export default {
    ** Nuxt.js dev-modules
    */
   buildModules: [
+    '@nuxtjs/dotenv',
     // Doc: https://github.com/nuxt-community/eslint-module
     '@nuxtjs/eslint-module',
     // Doc: https://github.com/nuxt-community/nuxt-tailwindcss
@@ -67,7 +66,10 @@ export default {
   modules: [
     [
       'storyblok-nuxt',
-      { accessToken: 'zTa0mMPr26a7IEBpNQtaLwtt', cacheProvider: 'memory' },
+      {
+        accessToken: process.env.STORYBLOK_TOKEN || 'preview-token',
+        cacheProvider: 'memory',
+      },
     ],
   ],
   /*

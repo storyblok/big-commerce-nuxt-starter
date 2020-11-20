@@ -1,32 +1,13 @@
 <template>
   <section
+    v-editable="story"
     v-if="product"
     class="text-gray-700 body-font overflow-hidden bg-white"
   >
-    <div
-      v-if="story.content"
-      v-editable="story.content"
-      class="container px-5 py-24 mx-auto text-center flex flex-col items-center"
-    >
-      <h1 class="text-4xl font-bold mb-8">{{ story.content.name }}</h1>
-      <div>
-        <span class="text-3xl text-primary text-left leading-tight h-3 block"
-          >“</span
-        >
-        <p
-          class="text-lg text-gray-600 px-5"
-          v-html="$storyapi.richTextResolver.render(story.content.description)"
-        />
-        <span
-          class="text-3xl text-primary text-right leading-tight h-3 block -mt-3"
-        >
-          ”
-        </span>
-      </div>
-    </div>
     <div class="container px-5 py-24 mx-auto">
       <div class="lg:w-4/5 mx-auto flex flex-wrap">
         <img
+          v-if="product.defaultImage"
           :alt="product.defaultImage.altText"
           class="lg:w-1/2 w-full object-cover object-center rounded border border-gray-200"
           :src="product.defaultImage.img1280px"
@@ -40,9 +21,10 @@
             >
           </p>
           <h1 class="text-gray-900 text-3xl title-font font-medium mb-1">
-            {{ product.name }}
+            {{ story.content ? story.content.name : product.name }}
           </h1>
-          <p class="leading-relaxed" v-html="product.description"></p>
+          <div v-if="story.content" class="leading-relaxed" v-html="richtext" />
+          <p v-else class="leading-relaxed" v-html="product.description"></p>
           <span class="block mt-4 pb-5 border-b-2 border-gray-200 mb-5"></span>
           <div class="flex">
             <span class="title-font font-medium text-2xl text-gray-900">
@@ -80,14 +62,20 @@
 </template>
 
 <script>
-import { getProductById } from '../../plugins/graphql-bigcommerce'
+import {
+  getProductBySlug,
+  getProductById,
+} from '../../plugins/graphql-bigcommerce'
 
 export default {
   async asyncData(context) {
     let story = {}
+    let commerceResponse = {}
+    let p2 = {}
+
     try {
       const { data } = await context.app.$storyapi.get(
-        `cdn/stories/product/${context.params.id}`,
+        `cdn/stories/product/${context.params.slug}`,
         {
           version: 'draft',
         }
@@ -97,11 +85,16 @@ export default {
       console.warn(e)
     }
 
-    const commerceResponse = await getProductById(context.params.id)
+    try {
+      commerceResponse = await getProductBySlug(`/${context.params.slug}`)
+      p2 = await getProductById(commerceResponse.site.route.node.entityId)
+    } catch (e) {
+      console.warn(e)
+    }
 
     return {
       story,
-      product: commerceResponse.site.product,
+      product: p2.site.product,
     }
   },
   data() {
@@ -110,6 +103,13 @@ export default {
       story: {},
       error: null,
     }
+  },
+  computed: {
+    richtext() {
+      return this.$storyapi.richTextResolver.render(
+        this.story.content.description
+      )
+    },
   },
   mounted() {
     this.$storybridge.on(['input', 'published', 'change'], (event) => {

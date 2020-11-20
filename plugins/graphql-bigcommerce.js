@@ -20,6 +20,7 @@ fragment ProductFields on Product {
     img1280px: url(width: 1280)
     altText
   }
+
   prices {
     price {
       value
@@ -49,7 +50,7 @@ async function sendQuery(query) {
     // mode: 'cors',
     headers: {
       'Content-Type': 'application/json',
-      Authorization: `Bearer ${process.env.storeToken}`,
+      Authorization: `Bearer ${process.env.BIGCOMMERCE_TOKEN}`,
     },
     body: JSON.stringify({
       query,
@@ -202,7 +203,7 @@ export async function getProductsById({
 }) {
   let cursorString = ''
   let dir = 'first'
-  const stringIds = ids.join(',')
+  const stringIds = ids ? ids.join(',') : ''
 
   if (cursor && cursor.length) {
     if (direction === 'before') dir = 'last'
@@ -241,6 +242,24 @@ export async function getProductById(productId) {
             }
           }
           ${productFragment}`
+
+  // Fetch data from the GraphQL Storefront API
+  return await sendQuery(graphQLQuery)
+}
+
+export async function getProductBySlug(slug) {
+  const graphQLQuery = `
+  query ProductSlug {
+    site {
+      route${slug ? `(path:"${slug}")` : ''} {
+        node {
+          id
+          ...ProductFields
+        }
+      }
+    }
+  }
+  ${productFragment}`
 
   // Fetch data from the GraphQL Storefront API
   return await sendQuery(graphQLQuery)
