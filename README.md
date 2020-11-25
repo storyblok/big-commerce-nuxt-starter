@@ -1,7 +1,7 @@
 <h1 align="center">Storyblok BigCommerce Shop Template</h1>
 
 <p align="center">
-Demo: <a href="https://big-commerce-demo.netlify.app/">big-commerce-demo.netlify.app</a>
+Demo: <a href="https://storyblok-storefront-nuxt.vercel.app/">storyblok-storefront-nuxt.vercel.app/</a>
 </p>
 
 <p align="center">
@@ -110,11 +110,6 @@ You can generate a deployable directory `dist` by running the following command.
 npm run generate
 ```
 
-Then you can deploy this directory with the netlify cli. Make sure to change the storeToken `nuxt.config.js` to the correct Domain token. You will probably need to generate a different token for your production site.
-
-```bash
-netlify deploy --dir=dist
-```
 
 ## ⛏️ Built Using <a name = "built_using"></a>
 
