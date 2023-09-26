@@ -24,3 +24,5 @@ logs
 !.env.example
 bigcommerce.js
 server/api/test.ts
+localhost-key.pem
+localhost.pem
