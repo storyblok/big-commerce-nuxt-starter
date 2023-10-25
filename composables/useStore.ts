@@ -10,6 +10,12 @@ export interface Product {
   }
 }
 
+const state = reactive<{
+  products: Product[]
+}>({
+  products: [],
+})
+
 export const useStore = () => {
   const config = useRuntimeConfig()
  
@@ -20,18 +26,6 @@ export const useStore = () => {
       Authorization: `Bearer ${config.public.bigCommerce.token}`,
     }, // change for: localhostToken when locally
   }
-
-  const state = reactive<{
-    products: Product[]
-  }>({
-    products: [],
-  })
-  /* async function fetchProducts(items) {
-    await Promise.all(items.map(async (item) => {
-      const { data } = await fetchProductById(item.id)
-      state.products.push(data)
-    }))
-  } */
 
   async function fetchProducts(ids: string[]) {
     const options = {
