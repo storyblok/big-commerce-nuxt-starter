@@ -1,3 +1,7 @@
+> [!WARNING]
+> This repository is no longer maintained.
+> To connect Storyblok with BigCommerce, see the [BigCommerce app](https://www.storyblok.com/docs/apps/bigcommerce). For a current Nuxt + Storyblok starter, use [blueprint-core-nuxt](https://github.com/storyblok/blueprint-core-nuxt).
+
 # Storyblok & Nuxt BigCommerce Starter
 
 
